@@ -1,0 +1,18 @@
+{
+  "name": "bot-whatsapp-zero-cost",
+  "version": "1.0.0",
+  "description": "Bot de WhatsApp autónomo 100% gratuito en Node.js, alternativa a n8n",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["whatsapp", "bot", "automation", "zero-cost"],
+  "author": "Lucatoons",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.26.0"
+  }
+}
