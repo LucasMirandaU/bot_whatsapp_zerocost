@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Envío - Bot WhatsApp</title>
+    <style>
+        :root {
+            --primary: #25d366;
+            --primary-hover: #1ebe5d;
+            --bg: #e5ddd5;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --whatsapp-dark: #075e54;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: var(--whatsapp-dark);
+            margin: 0 0 5px 0;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-size: 14px;
+        }
+
+        input[type="text"], 
+        input[type="url"], 
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, 
+        input[type="url"]:focus, 
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .help-text {
+            display: block;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button:disabled {
+            background-color: #90eeaa;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .success { color: var(--whatsapp-dark); background: #dcf8c6; padding: 10px; border-radius: 6px; }
+        .error { color: #d32f2f; background: #ffebee; padding: 10px; border-radius: 6px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>🤖 WhatsApp Web Panel</h2>
+            <p class="subtitle">Enviá mensajes sin necesidad de saber programar</p>
+        </div>
+        
+        <div class="form-group">
+            <label for="destinatarios">Destinatario/s (Opcional):</label>
+            <input type="text" id="destinatarios" placeholder="Ej: 5491123456789">
+            <span class="help-text">Si lo dejás en blanco, el mensaje se enviará a los grupos configurados por defecto en el sistema. Podés separar varios con coma.</span>
+        </div>
+
+        <div class="form-group">
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" placeholder="Escribí tu mensaje acá..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="mediaFile">Adjuntar Archivo Local (Opcional):</label>
+            <input type="file" id="mediaFile" accept="image/*,application/pdf">
+        </div>
+
+        <div class="form-group">
+            <label for="mediaUrl">O enlazar desde una URL externa (Opcional):</label>
+            <input type="url" id="mediaUrl" placeholder="https://ejemplo.com/imagen.jpg">
+        </div>
+
+        <button onclick="enviarMensaje()" id="btnEnviar">Enviar Mensaje Ahora</button>
+
+        <div id="status"></div>
+    </div>
+
+    <script>
+        async function enviarMensaje() {
+            const btn = document.getElementById('btnEnviar');
+            const statusDiv = document.getElementById('status');
+            const destinatarios = document.getElementById('destinatarios').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+            const mediaUrl = document.getElementById('mediaUrl').value.trim();
+            const fileInput = document.getElementById('mediaFile');
+
+            if (!mensaje && !mediaUrl && fileInput.files.length === 0) {
+                mostrarEstado('❌ Tenés que escribir un mensaje o adjuntar un archivo/URL.', 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = 'Enviando... aguardá un momento';
+            statusDiv.innerHTML = '';
+
+            try {
+                const payload = { mensaje, mediaUrl };
+                if (destinatarios) {
+                    payload.destinatariosOverride = destinatarios;
+                }
+
+                // Si hay un archivo local, lo convertimos a Base64
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    payload.mediaMime = file.type;
+                    payload.mediaName = file.name;
+                    
+                    const reader = new FileReader();
+                    payload.mediaBase64 = await new Promise((resolve) => {
+                        reader.onload = () => resolve(reader.result.split(',')[1]);
+                        reader.readAsDataURL(file);
+                    });
+                }
+
+                const res = await fetch('/api/enviar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await res.json();
+
+                if (data.success) {
+                    mostrarEstado(`✅ ¡Mensaje enviado con éxito a ${data.enviados} chat(s)!`, 'success');
+                    document.getElementById('mensaje').value = ''; 
+                    fileInput.value = ''; // Limpiar el input de archivo
+                } else {
+                    mostrarEstado(`❌ Error: ${data.error}`, 'error');
+                }
+            } catch (err) {
+                mostrarEstado('❌ Error de conexión con el bot. ¿Está encendido?', 'error');
+            }
+
+            btn.disabled = false;
+            btn.innerText = 'Enviar Mensaje Ahora';
+        }
+
+        function mostrarEstado(texto, tipo) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${tipo}">${texto}</div>`;
+        }
+    </script>
+</body>
+</html>

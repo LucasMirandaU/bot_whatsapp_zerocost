@@ -4,15 +4,23 @@
   "description": "Bot de WhatsApp autónomo 100% gratuito en Node.js, alternativa a n8n",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "postinstall": "patch-package"
   },
-  "keywords": ["whatsapp", "bot", "automation", "zero-cost"],
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "automation",
+    "zero-cost"
+  ],
   "author": "Lucatoons",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "patch-package": "^8.0.1",
+    "postinstall-postinstall": "^2.1.0",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.26.0"
+    "whatsapp-web.js": "^1.34.7"
   }
 }

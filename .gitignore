@@ -17,3 +17,8 @@ yarn-error.log*
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+.wwebjs_auth*
+
+.wwebjs_cache
+.wwebjs_cache*

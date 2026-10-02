@@ -11,6 +11,7 @@ Muchas veces la comunidad recomienda plataformas como *n8n* o *Make*, o pagar po
 - **Soporte Multimedia (Nuevo):** Envío de imágenes, documentos y PDFs.
 - **Comandos Interactivos (Nuevo):** Responde a comandos como `!ping`, `!estado` y `!vincular`.
 - **Reconexión Automática (Nuevo):** Se recupera solo si la sesión de WhatsApp se desconecta.
+- **Autosanación de Librería (Nuevo):** Incluye parche automatizado (`patch-package`) que soluciona bugs nativos y recientes de `whatsapp-web.js` con las nuevas actualizaciones de memoria de WhatsApp Web.
 - **Asistente de Configuración:** Si no sabés el ID de un grupo, el bot tiene un listener integrado (`!vincular`) que te lo escupe por consola.
 
 ## 🛠️ Desarrollo y Versionado
