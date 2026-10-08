@@ -42,3 +42,11 @@ Para que el bot sepa a dónde enviar los mensajes, necesita un ID.
 ## Paso 6: ¿Cómo le mando mensajes al bot para que los reenvíe?
 El bot funciona como un "servidor" en tu computadora. Para pedirle que envíe un mensaje, otros programas de tu PC deben enviarle una señal.
 Si usás sistemas de facturación o gestores ERP, podés pedirle a tu técnico que envíe una petición `POST` a la dirección `http://localhost:3000/api/enviar`. ¡El bot se encargará de reenviarlo al instante a WhatsApp!
+
+## Paso 7: Cómo automatizar el bot para que corra "invisible" (Solo Windows)
+Si vas a configurar el bot para que se ejecute automáticamente todos los días usando el **Programador de Tareas de Windows**, es muy probable que la pantalla negra quede abierta y te moleste, o que alguien le haga un clic por accidente (si hacés clic dentro de la consola, el programa se "congela" por completo).
+Para evitar esto y que el bot corra como un verdadero fantasma de fondo:
+1. Abrí el Programador de Tareas y hacé doble clic en la tarea de tu bot.
+2. En la pestaña **General**, marcá la opción **"Ejecutar tanto si el usuario ha iniciado sesión como si no"**.
+3. Marcá también la casilla que dice **"Oculta"**.
+¡Listo! De esta forma, el bot se encenderá a la hora acordada, hará su trabajo en silencio por detrás de escena y no verás ninguna ventana negra interrumpiendo tu pantalla.
