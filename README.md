@@ -6,6 +6,7 @@ Muchas veces la comunidad recomienda plataformas como *n8n* o *Make*, o pagar po
 
 ## ✨ Características
 - **Cero suscripciones:** No necesitás pagar mensualidades ni costos por mensaje.
+- **Panel Web / Dashboard Integrado (Nuevo):** Interfaz gráfica accesible desde el navegador para redactar y enviar mensajes y archivos multimedia manualmente con un solo clic, sin escribir código.
 - **Microservicio API REST (Nuevo):** Incluye Express.js integrado. Podés enviarle peticiones POST locales para disparar mensajes desde cualquier otro sistema.
 - **Múltiples Destinatarios (Nuevo):** Permite enviar la misma alerta a múltiples grupos o números al mismo tiempo.
 - **Soporte Multimedia (Nuevo):** Envío de imágenes, documentos y PDFs.

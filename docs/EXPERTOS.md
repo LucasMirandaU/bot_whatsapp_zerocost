@@ -22,8 +22,9 @@ Si ya tenés experiencia con Node.js, APIs REST y despliegues, esta guía te mue
    # O en prod: pm2 start index.js --name "whatsapp-bot"
    ```
 
-## 📡 Uso de la API REST Integrada
+## 📡 Uso de la API REST Integrada y Panel Web
 El bot levanta automáticamente un servidor Express en el puerto definido en `.env` (`PORT=3000` por defecto).
+Además de la API, sirve una interfaz web en la raíz (`/`) para pruebas manuales o envíos rápidos desde el navegador (`http://localhost:3000`).
 
 ### Enviar un mensaje de texto
 Hacé un POST request a `/api/enviar`:

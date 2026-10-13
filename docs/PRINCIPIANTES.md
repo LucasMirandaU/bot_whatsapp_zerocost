@@ -40,8 +40,20 @@ Para que el bot sepa a dónde enviar los mensajes, necesita un ID.
 5. Volvé a abrir la consola y escribí `npm start` para prenderlo de nuevo. ¡Ahora el bot ya sabe a dónde enviar los mensajes!
 
 ## Paso 6: ¿Cómo le mando mensajes al bot para que los reenvíe?
-El bot funciona como un "servidor" en tu computadora. Para pedirle que envíe un mensaje, otros programas de tu PC deben enviarle una señal.
-Si usás sistemas de facturación o gestores ERP, podés pedirle a tu técnico que envíe una petición `POST` a la dirección `http://localhost:3000/api/enviar`. ¡El bot se encargará de reenviarlo al instante a WhatsApp!
+El bot funciona como un "servidor" en tu computadora y ofrece dos formas de enviar mensajes:
+
+### Opción A: Desde el Panel Web (La forma más fácil y visual 🖥️)
+Una vez que el bot esté encendido y conectado a WhatsApp, podés abrir cualquier navegador web (Chrome, Edge, Firefox, etc.) e ingresar a la dirección que te indicó la consola, por ejemplo:
+`http://localhost:3000` (o el puerto que tengas configurado en tu archivo `.env`, por ejemplo `http://localhost:3005`).
+
+Allí verás una pantalla sencilla y amigable donde podés:
+1. Escribir el texto de tu mensaje.
+2. Definir destinatarios específicos (si querés enviar a otros contactos distintos a los del `.env`).
+3. Adjuntar archivos locales (imágenes, documentos, PDFs) o pegar una URL directa.
+4. Presionar el botón verde **"Enviar Mensaje"**. ¡El bot lo despachará al instante a WhatsApp sin que tengas que programar nada!
+
+### Opción B: Integración automática con tu sistema o ERP ⚙️
+Si contás con un sistema de facturación o gestor ERP y querés que las alertas salgan de manera 100% automática, podés pedirle a tu técnico o programador que envíe una petición `POST` a la dirección `http://localhost:3000/api/enviar` (o tu puerto configurado). ¡El bot se encargará de reenviarlo al instante a WhatsApp!
 
 ## Paso 7: Cómo automatizar el bot para que corra "invisible" (Solo Windows)
 Si vas a configurar el bot para que se ejecute automáticamente todos los días usando el **Programador de Tareas de Windows**, es muy probable que la pantalla negra quede abierta y te moleste, o que alguien le haga un clic por accidente (si hacés clic dentro de la consola, el programa se "congela" por completo).
