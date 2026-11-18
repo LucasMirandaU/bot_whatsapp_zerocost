@@ -22,14 +22,20 @@
    ```
    *Esto descargará todas las piezas necesarias para que el bot funcione. Puede tardar un par de minutos, paciencia.*
 
-## Paso 4: Encender y Vincular tu WhatsApp
-1. Una vez que termine de instalar, en la misma consola escribí:
-   ```bash
-   npm start
-   ```
-2. Vas a ver que la consola muestra un mensaje de inicio y, tras unos segundos, aparecerá un **código QR gigante**.
-3. Abrí WhatsApp en tu celular, andá a la configuración de **Dispositivos Vinculados** y escaneá ese código (tal cual como cuando iniciás sesión en WhatsApp Web).
-4. ¡Listo! La consola dirá "WhatsApp conectado exitosamente".
+## Paso 4: Encender y Vincular tu WhatsApp (¡100% Visual!)
+Para encender el bot tenés dos opciones muy fáciles:
+- **Opción recomendada (1 Clic):** Hacé doble clic en el archivo **`Iniciar_Bot.bat`** dentro de la carpeta. Esto abrirá automáticamente el Panel Web en tu navegador predeterminado (por ejemplo, Chrome o Edge).
+- **Opción consola:** En la consola negra escribí `npm start` y abrí tu navegador en la dirección que te indique (por ejemplo `http://localhost:3005`).
+
+En la pantalla del navegador vas a ver el código QR y las instrucciones paso a paso:
+1. Abrí **WhatsApp** en el teléfono.
+2. Tocá los **tres puntos ⋮** (o **Ajustes** en iPhone) y seleccioná **Dispositivos vinculados**.
+3. Tocá **Vincular un dispositivo** y escaneá el código QR que ves en tu pantalla.
+4. ¡Listo! La pantalla cambiará automáticamente a verde diciendo *"Conectado exitosamente"* y te mostrará el panel para enviar mensajes.
+
+> [!TIP]
+> **¿Qué pasa si en el futuro cambian de celular en el local?**
+> ¡No tenés que borrar archivos raros ni programar nada! Simplemente entrás al panel web y tocás el botón rojo **"Cambiar Teléfono"**. El bot cerrará la sesión anterior y generará un nuevo código QR en pantalla al instante para vincular el nuevo celular.
 
 ## Paso 5: Obtener el ID de tu Grupo
 Para que el bot sepa a dónde enviar los mensajes, necesita un ID.

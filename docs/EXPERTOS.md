@@ -24,9 +24,29 @@ Si ya tenés experiencia con Node.js, APIs REST y despliegues, esta guía te mue
 
 ## 📡 Uso de la API REST Integrada y Panel Web
 El bot levanta automáticamente un servidor Express en el puerto definido en `.env` (`PORT=3000` por defecto).
-Además de la API, sirve una interfaz web en la raíz (`/`) para pruebas manuales o envíos rápidos desde el navegador (`http://localhost:3000`).
+El servidor arranca de forma inmediata ("Always-On") sirviendo tanto la API REST como la interfaz web reactiva en la raíz (`/`) para vinculación y pruebas manuales.
 
-### Enviar un mensaje de texto
+### Endpoints Disponibles
+
+#### 1. Consultar estado del bot y código QR
+`GET /api/estado`
+Devuelve el estado de la sesión, información del usuario autenticado y el código QR en Base64 (si se requiere vinculación):
+```json
+{
+  "status": "READY", // "INITIALIZING" | "QR_READY" | "AUTHENTICATING" | "READY" | "DISCONNECTED"
+  "qrDataUrl": "data:image/png;base64,...",
+  "user": "54911...",
+  "destinatariosConfigurados": 1,
+  "version": "1.0.0",
+  "port": 3000
+}
+```
+
+#### 2. Desvincular sesión / Cambiar de teléfono
+`POST /api/desvincular`
+Cierra la sesión activa en WhatsApp Web, destruye la instancia anterior y re-inicializa el cliente generando un nuevo código QR limpio.
+
+#### 3. Enviar un mensaje de texto
 Hacé un POST request a `/api/enviar`:
 
 ```bash
