@@ -31,7 +31,7 @@ let botState = {
 function killZombieProcesses() {
     try {
         if (process.platform === 'win32') {
-            execSync(`powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter 'Name = ''chrome.exe''' | Where-Object { $_.CommandLine -match '.wwebjs_auth' } | Invoke-CimMethod -MethodName Terminate"`, { stdio: 'ignore' });
+            execSync(`powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter \\"Name = 'chrome.exe'\\" | Where-Object { \\$_.CommandLine -match '.wwebjs_auth' } | Invoke-CimMethod -MethodName Terminate"`, { stdio: 'ignore' });
         }
     } catch (e) {
         // Silencioso si no hay procesos huérfanos
@@ -275,6 +275,22 @@ function initClient() {
 
 // Iniciar el cliente de WhatsApp por primera vez
 initClient();
+
+// Manejo global para evitar caídas del servidor web
+process.on('uncaughtException', (err) => {
+    console.error('⚠️ Aviso del sistema (uncaughtException):', err.message || err);
+    if (botState.status !== 'READY') {
+        botState.status = 'INITIALIZING';
+        botState.qrDataUrl = null;
+        setTimeout(() => {
+            initClient();
+        }, 4000);
+    }
+});
+
+process.on('unhandledRejection', (reason) => {
+    console.error('⚠️ Aviso del sistema (unhandledRejection):', reason);
+});
 
 // Manejo de cierre limpio (Evita que queden procesos zombis de Chrome al apretar Ctrl+C)
 process.on('SIGINT', async () => {

@@ -29,16 +29,16 @@ if exist .env (
     )
 )
 
-echo [1/2] Abriendo el Panel Web en tu navegador (http://localhost:%PORT%)...
-start http://localhost:%PORT%
-
-echo [2/2] Iniciando el servicio del bot...
+echo Iniciando el bot y abriendo el panel web en http://localhost:%PORT%...
 echo.
 echo ****************************************************************
 echo   RECORDA: No cierres esta ventana mientras uses el bot.
 echo   Para detenerlo, presiona Ctrl + C.
 echo ****************************************************************
 echo.
+
+REM Abrir el navegador tras 2 segundos para asegurar que el servidor web ya este escuchando
+start "" cmd /c "timeout /t 2 /nobreak >nul & start http://localhost:%PORT%"
 
 node index.js
 
