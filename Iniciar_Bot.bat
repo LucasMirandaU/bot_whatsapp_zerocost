@@ -1,23 +1,27 @@
 @echo off
-chcp 65001 >nul
+setlocal
 title Bot de WhatsApp (Zero-Cost) - by Lucatoons
 
+REM Asegurar que Node.js este en el PATH si esta instalado en Program Files
+if exist "C:\Program Files\nodejs\node.exe" (
+    set "PATH=%PATH%;C:\Program Files\nodejs"
+)
+
 echo ================================================================
-echo           🤖 BOT DE WHATSAPP (ZERO-COST) - BY LUCATOONS
+echo           BOT DE WHATSAPP (ZERO-COST) - BY LUCATOONS
 echo ================================================================
 echo.
 
-:: Verificar si Node.js está instalado
 where node >nul 2>nul
 if %ERRORLEVEL% neq 0 (
-    echo [ERROR] No se detectó Node.js instalado en esta computadora.
+    echo [ERROR] No se detecto Node.js instalado en esta computadora.
     echo Por favor descargalo e instalalo desde: https://nodejs.org/
     echo.
     pause
-    exit /b
+    exit /b 1
 )
 
-:: Obtener el puerto desde el archivo .env si existe
+REM Leer el puerto desde el archivo .env si existe
 set PORT=3000
 if exist .env (
     for /f "tokens=1,2 delims==" %%A in (.env) do (
@@ -31,8 +35,8 @@ start http://localhost:%PORT%
 echo [2/2] Iniciando el servicio del bot...
 echo.
 echo ****************************************************************
-echo   RECORDÁ: No cierres esta ventana negra mientras uses el bot.
-echo   Para detenerlo, presioná Ctrl + C.
+echo   RECORDA: No cierres esta ventana mientras uses el bot.
+echo   Para detenerlo, presiona Ctrl + C.
 echo ****************************************************************
 echo.
 
