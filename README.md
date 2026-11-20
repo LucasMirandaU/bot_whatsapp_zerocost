@@ -26,7 +26,7 @@ Este bot está programado en Node.js, por lo que **funciona perfectamente en Win
 ## 📚 Guías de Instalación y Uso
 Para que todos puedan aprovechar esta herramienta, dividimos las instrucciones en dos guías. ¡Elegí la que mejor se adapte a vos!
 
-- 👶 **[Guía para Principiantes](./docs/PRINCIPIANTES.md):** Paso a paso detallado desde cero, sin términos técnicos. ¡Cualquiera puede hacerlo!
+- 👶 **[Guía para Principiantes y Operadores](./docs/PRINCIPIANTES.md):** Paso a paso detallado desde cero, guía rápida del día a día para el local y preguntas frecuentes, sin términos técnicos. ¡Cualquiera puede usarlo!
 - 🤓 **[Guía para Expertos / Desarrolladores](./docs/EXPERTOS.md):** Comandos rápidos, endpoints de la API REST, payloads y despliegue en servidores Linux.
 
 ## 💡 Licencia
